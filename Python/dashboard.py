@@ -255,7 +255,7 @@ with tab_website:
                 y='pageview_url',
                 x='total_sessions',
                 orientation='h',
-                title='Top 10 Landing Pages by Session',
+                title='Landing Pages by Session',
                 labels={'pageview_url': 'Landing Page', 'total_sessions': 'Total Sessions'},
                 text='total_sessions'
             )
