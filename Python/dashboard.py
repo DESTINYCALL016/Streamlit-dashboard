@@ -468,7 +468,7 @@ with tab_product:
             column_config={
                 "total_revenue": st.column_config.NumberColumn(format="$%.2f"),
                 "total_margin": st.column_config.NumberColumn(format="$%.2f"),
-                "refund_rate": st.column_config.NumberColumn(format="%.2f%%", min_value=0, max_value=1)
+                "refund_rate": st.column_config.NumberColumn(format="%.2f", min_value=0, max_value=1)
             }
         )
         
