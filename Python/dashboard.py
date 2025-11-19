@@ -226,9 +226,9 @@ tab_website, tab_channel, tab_traffic, tab_user, tab_product = st.tabs([
 # --- Tab 1: Website ---
 with tab_website:
     st.header("Website & Funnel Performance")
-    
+    '''.nunique() if not df_sessions_filt.empty else 0'''
     # Calculate KPIs
-    total_sessions = df_sessions_filt['website_session_id'].nunique() if not df_sessions_filt.empty else 0
+    total_sessions = (df_sessions_filt['website_session_id'])/1000000
     total_orders = df_orders_filt['order_id'].nunique() if not df_orders_filt.empty else 0
     total_revenue = df_full_orders_filt['total_revenue'].sum() if not df_full_orders_filt.empty else 0.0
     cvr = (total_orders / total_sessions) if total_sessions > 0 else 0.0
@@ -247,7 +247,7 @@ with tab_website:
     lp_stats = get_landing_page_stats(df_pageviews_filt, df_sessions_filt, df_orders_filt)
     
     with col1:
-        st.subheader("Landing Pages")
+        st.subheader("Top 10 Landing Pages")
         if not lp_stats.empty:
             lp_plot_data = lp_stats.head(10).reset_index()
             fig_top_pages = px.bar(
@@ -255,7 +255,7 @@ with tab_website:
                 y='pageview_url',
                 x='total_sessions',
                 orientation='h',
-                title='Landing Pages by Session',
+                title='Top 10 Landing Pages by Session',
                 labels={'pageview_url': 'Landing Page', 'total_sessions': 'Total Sessions'},
                 text='total_sessions'
             )
@@ -468,7 +468,7 @@ with tab_product:
             column_config={
                 "total_revenue": st.column_config.NumberColumn(format="$%.2f"),
                 "total_margin": st.column_config.NumberColumn(format="$%.2f"),
-                "refund_rate": st.column_config.NumberColumn(format="%.2f", min_value=0, max_value=1)
+                "refund_rate": st.column_config.NumberColumn(format="%.2f%%", min_value=0, max_value=1)
             }
         )
         
