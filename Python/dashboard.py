@@ -228,7 +228,7 @@ with tab_website:
     st.header("Website & Funnel Performance")
     '''.nunique() if not df_sessions_filt.empty else 0'''
     # Calculate KPIs
-    total_sessions = (df_sessions_filt['website_session_id'])/1000000
+    total_sessions =df_sessions_filt['website_session_id'].nunique() if not df_sessions_filt.empty else 0
     total_orders = df_orders_filt['order_id'].nunique() if not df_orders_filt.empty else 0
     total_revenue = df_full_orders_filt['total_revenue'].sum() if not df_full_orders_filt.empty else 0.0
     cvr = (total_orders / total_sessions) if total_sessions > 0 else 0.0
