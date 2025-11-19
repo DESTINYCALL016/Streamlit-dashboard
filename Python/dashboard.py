@@ -247,7 +247,7 @@ with tab_website:
     lp_stats = get_landing_page_stats(df_pageviews_filt, df_sessions_filt, df_orders_filt)
     
     with col1:
-        st.subheader("Top 10 Landing Pages")
+        st.subheader("Landing Page Performance")
         if not lp_stats.empty:
             lp_plot_data = lp_stats.head(10).reset_index()
             fig_top_pages = px.bar(
@@ -255,7 +255,7 @@ with tab_website:
                 y='pageview_url',
                 x='total_sessions',
                 orientation='h',
-                title='Top 10 Landing Pages by Session',
+                title='Landing Pages by Session',
                 labels={'pageview_url': 'Landing Page', 'total_sessions': 'Total Sessions'},
                 text='total_sessions'
             )
